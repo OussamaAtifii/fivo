@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { PostgrestError } from '@supabase/supabase-js';
 import { WorkoutDay, WorkoutDayType } from '../models/workout-day.model';
-import { AuthApi } from '@core/auth/services/auth-api';
 import { DateService } from '@shared/services/date-service';
 import { SupabaseService } from '@shared/services/supabase-service';
+import { AuthStore } from '@core/auth/services/auth-store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkoutDaysApi {
-  private authApi = inject(AuthApi);
+  private authStore = inject(AuthStore);
   private dateService = inject(DateService);
   private supabase = inject(SupabaseService).getClient();
 
@@ -30,7 +30,7 @@ export class WorkoutDaysApi {
   }
 
   async toggleWorkoutForDate(date: Date, type: WorkoutDayType) {
-    const userId = this.authApi.getCurrentUser()?.id;
+    const userId = this.authStore.user()?.id;
     const formattedDate = this.dateService.formatDateToYYYYMMDD(date);
 
     const { data, error } = await this.supabase
