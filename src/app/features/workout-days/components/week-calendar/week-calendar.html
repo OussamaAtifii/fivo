@@ -1,0 +1,16 @@
+<section class="flex flex-col gap-4">
+  <div class="flex justify-between items-center text-sm font-semibold text-black">
+    <p>This Week</p>
+    <p class="text-primary">{{ weekStartEnd() }}</p>
+  </div>
+
+  @if (workoutDaysStore.loading()) {
+    <app-week-calendar-skeleton />
+  } @else {
+    <div class="grid grid-cols-7 gap-2">
+      @for (weekDay of workoutDaysStore.currentWeek(); track $index) {
+        <app-workout-day-card [weekDay]="weekDay" />
+      }
+    </div>
+  }
+</section>

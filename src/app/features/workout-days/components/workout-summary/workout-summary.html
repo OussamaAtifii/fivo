@@ -1,0 +1,47 @@
+@if (workoutDaysStore.loading()) {
+  <app-workout-summary-skeleton />
+} @else {
+  <app-card>
+    <div class="flex flex-col gap-4">
+      <div class="flex justify-between items-center">
+        <p class="text-xs font-bold uppercase text-text-primary">Weekly Goal</p>
+
+        @if (workoutDaysStore.hasJokerDayInWeek()) {
+          <app-joker-badge />
+        }
+      </div>
+
+      <p class="text-2xl font-bold text-black">
+        {{ workoutDaysStore.completedWorkoutDaysCount() }}
+        <span class="text-base font-medium text-text-primary">
+          / {{ workoutDaysStore.targetDays() }} days
+        </span>
+      </p>
+
+      <div class="flex flex-col gap-2">
+        <app-progress-bar [progressPercentage]="progressPercentage()" />
+        <app-helper-text>{{ workoutDaysStore.goalMessage() }}</app-helper-text>
+      </div>
+
+      @let done = hasWorkout();
+
+      <div class="flex flex-col gap-2">
+        <app-button (clicked)="openLogWorkoutDayDialog()" [disabled]="done">
+          @if (done) {
+            <app-heart-check-icon />
+            Workout Completed
+          } @else {
+            <app-circle-check-icon />
+            Log Today's Workout
+          }
+        </app-button>
+
+        @if (done) {
+          <app-helper-text> Today's workout has been logged. Great job! 🎉 </app-helper-text>
+        }
+      </div>
+    </div>
+  </app-card>
+}
+
+<app-log-workout-day-dialog />

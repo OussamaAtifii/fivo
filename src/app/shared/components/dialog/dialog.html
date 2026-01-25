@@ -1,0 +1,16 @@
+<dialog
+  #dialog
+  class="rounded-xl p-6 m-auto shadow-xl bg-white sm:w-full w-[90%] max-w-md backdrop:bg-black/20 backdrop:backdrop-blur-xs duration-300"
+>
+  <div
+    class="absolute top-4 right-4 rounded-full p-1 hover:bg-muted/10 duration-300"
+    (click)="close()"
+  >
+    <app-x-icon class="hover:cursor-pointer" />
+  </div>
+  @if (title()) {
+    <h2 class="text-lg font-semibold mb-4">{{ title() }}</h2>
+  }
+
+  <ng-content />
+</dialog>
