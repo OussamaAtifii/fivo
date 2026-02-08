@@ -3,7 +3,6 @@ import { WorkoutDaysApi } from './workout-days-api';
 import { WorkoutDaysState } from '../models/workout-days-state.model';
 import { WorkoutDayType } from '../models/workout-day.model';
 import { DateService } from '@shared/services/date-service';
-import dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root',
@@ -54,21 +53,27 @@ export class WorkoutDaysStore {
   });
 
   canFinishTarget = computed(() => {
-    const completedDays = this.completedWorkoutDaysCount();
     const targetDays: number = 5;
-    const daysLeft = targetDays - completedDays;
+    const daysLeft = targetDays - 4;
     const today = new Date().getDay();
     const remainingDaysInWeek = 7 - today;
     const daysIncludingToday = remainingDaysInWeek === 7 ? 1 : remainingDaysInWeek;
 
-    return daysLeft <= daysIncludingToday && !this.hasWorkoutForDate(new Date());
+    if (targetDays === this.completedWorkoutDaysCount()) return true;
+
+    return daysLeft < daysIncludingToday && !this.hasWorkoutForDate(new Date());
   });
 
-  goalMessage = computed(() =>
-    this.canFinishTarget()
+  goalMessage = computed(() => {
+    const targetDays: number = 5;
+
+    if (targetDays === this.completedWorkoutDaysCount())
+      return 'Congratulations! You’ve hit your target 🎉';
+
+    return this.canFinishTarget()
       ? `${this.daysLeft()} more sessions to hit your goal!`
-      : 'Goal missed, try again next week! 💪',
-  );
+      : 'Goal missed, try again next week! 💪';
+  });
 
   async loadWorkoutDays() {
     this.setLoading();
