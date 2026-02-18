@@ -60,15 +60,14 @@ export class WorkoutDaysStore {
     const daysIncludingToday = remainingDaysInWeek === 7 ? 1 : remainingDaysInWeek;
 
     if (targetDays === this.completedWorkoutDaysCount()) return true;
-
-    return daysLeft < daysIncludingToday && !this.hasWorkoutForDate(new Date());
+    return daysLeft < daysIncludingToday;
   });
 
   goalMessage = computed(() => {
     const targetDays: number = 5;
 
     if (targetDays === this.completedWorkoutDaysCount())
-      return 'Congratulations! You’ve hit your target 🎉';
+      return "Congratulations! You've hit your target 🎉";
 
     return this.canFinishTarget()
       ? `${this.daysLeft()} more sessions to hit your goal!`
