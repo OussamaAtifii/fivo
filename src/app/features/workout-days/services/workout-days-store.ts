@@ -54,19 +54,19 @@ export class WorkoutDaysStore {
 
   canFinishTarget = computed(() => {
     const targetDays: number = 5;
-    const daysLeft = targetDays - 4;
+    const daysLeft = targetDays - this.completedWorkoutDaysCount();
     const today = new Date().getDay();
     const remainingDaysInWeek = 7 - today;
     const daysIncludingToday = remainingDaysInWeek === 7 ? 1 : remainingDaysInWeek;
 
     if (targetDays === this.completedWorkoutDaysCount()) return true;
-    return daysLeft < daysIncludingToday;
+    return daysLeft <= daysIncludingToday;
   });
 
   goalMessage = computed(() => {
     const targetDays: number = 5;
 
-    if (targetDays === this.completedWorkoutDaysCount())
+    if (this.completedWorkoutDaysCount() >= targetDays)
       return "Congratulations! You've hit your target 🎉";
 
     return this.canFinishTarget()
