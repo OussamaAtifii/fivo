@@ -9,6 +9,7 @@ import { WorkoutSummarySkeleton } from '../workout-summary-skeleton/workout-summ
 import { HelperText } from '@shared/components/helper-text/helper-text';
 import { HeartCheckIcon } from '@shared/icons/heart-check-icon/heart-check-icon';
 import { Button } from '@shared/components/button/button';
+import { CheckIcon } from '@shared/icons/check-icon/check-icon';
 
 @Component({
   selector: 'app-workout-summary',
@@ -20,7 +21,6 @@ import { Button } from '@shared/components/button/button';
     LogWorkoutDayDialog,
     WorkoutSummarySkeleton,
     HelperText,
-    HeartCheckIcon,
     Button,
   ],
   templateUrl: './workout-summary.html',
@@ -44,5 +44,5 @@ export class WorkoutSummary {
     this.dialog?.open();
   }
 
-  hasWorkout = computed(() => this.workoutDaysStore.hasWorkoutForDate(new Date()));
+  hasWorkout = computed(() => this.workoutDaysStore.todayHasWorkout());
 }

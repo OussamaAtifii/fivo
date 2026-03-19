@@ -110,6 +110,11 @@ export class WorkoutDaysStore {
     return data.some((workoutDay) => this.dateService.sameDate(workoutDay.date, date));
   }
 
+  todayHasWorkout = computed(() => {
+    const data = this.data();
+    return data.some((workoutDay) => this.dateService.sameDate(workoutDay.date, new Date()));
+  });
+
   hasJokerDayForDate(date: Date): boolean {
     const data = this.data();
     return data.some(

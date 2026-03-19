@@ -8,11 +8,13 @@ describe('ProgressBar', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgressBar]
-    })
-    .compileComponents();
+      imports: [ProgressBar],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProgressBar);
+
+    fixture.componentRef.setInput('progressPercentage', 90);
+
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

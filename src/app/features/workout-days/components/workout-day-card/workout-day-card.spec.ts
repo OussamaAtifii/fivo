@@ -8,11 +8,13 @@ describe('WorkoutDayCard', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkoutDayCard]
-    })
-    .compileComponents();
+      imports: [WorkoutDayCard],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(WorkoutDayCard);
+
+    fixture.componentRef.setInput('weekDay', new Date());
+
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
