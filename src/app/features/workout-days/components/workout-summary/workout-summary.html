@@ -33,7 +33,7 @@
           data-testid="complete-workout-btn"
           (clicked)="openLogWorkoutDayDialog()"
           [disabled]="done"
-          [variant]="'secondary'"
+          [variant]="done ? 'secondary' : 'primary'"
         >
           @if (done) {
             <app-circle-check-icon />
