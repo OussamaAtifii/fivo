@@ -20,9 +20,12 @@ export class WorkoutDaysApi {
     workoutDays: WorkoutDay[];
     error: PostgrestError | null;
   }> {
+    const userId = this.authStore.userId();
+
     const { data: workoutDays, error } = await this.supabase
       .from('days')
       .select()
+      .eq('user_id', userId)
       .gte('date', this.dateService.formatDateToYYYYMMDD(from))
       .lte('date', this.dateService.formatDateToYYYYMMDD(to));
 

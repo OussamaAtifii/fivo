@@ -1,0 +1,10 @@
+<app-card>
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <app-avatar [username]="friendWorkout().username" />
+      <p class="text-sm font-semibold text-black">{{ friendWorkout().username }}'s Progress</p>
+    </div>
+
+    <p class="text-primary text-sm font-semibold">{{ friendWorkout().workoutsThisWeek }} / 5</p>
+  </div>
+</app-card>

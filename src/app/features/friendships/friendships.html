@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-4">
+  @if (friendsStore.loading()) {
+    <app-friends-skeleton />
+  } @else {
+    @for (friendWorkout of friendsStore.data(); track $index) {
+      <app-friend-card [friendWorkout]="friendWorkout" />
+    }
+  }
+</div>

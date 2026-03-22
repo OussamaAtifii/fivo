@@ -7,9 +7,7 @@ import { CircleCheckIcon } from '@shared/icons/circle-check-icon/circle-check-ic
 import { LogWorkoutDayDialog } from '../log-workout-day-dialog/log-workout-day-dialog';
 import { WorkoutSummarySkeleton } from '../workout-summary-skeleton/workout-summary-skeleton';
 import { HelperText } from '@shared/components/helper-text/helper-text';
-import { HeartCheckIcon } from '@shared/icons/heart-check-icon/heart-check-icon';
 import { Button } from '@shared/components/button/button';
-import { CheckIcon } from '@shared/icons/check-icon/check-icon';
 
 @Component({
   selector: 'app-workout-summary',

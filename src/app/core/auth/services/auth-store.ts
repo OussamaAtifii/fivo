@@ -20,6 +20,8 @@ export class AuthStore {
     return user.email.slice(0, 2).toUpperCase();
   });
 
+  userId = computed(() => this.user()?.id);
+
   async signIn({ email, password }: { email: string; password: string }) {
     const { data, error } = await this.authApi.signIn({ email, password });
 
