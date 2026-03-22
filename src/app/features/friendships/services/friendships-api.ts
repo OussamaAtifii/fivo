@@ -15,16 +15,14 @@ export class FriendshipsApi {
       .from('friendships')
       .select(
         `
-        *,
-      profiles!friend_id (
-      username,
-      avatar_url
-    )
-  `,
+          *,
+          requester:profiles!user_id (username, avatar_url),
+          recipient:profiles!friend_id (username, avatar_url)
+        `,
       )
       .eq('status', 'accepted');
 
-    return { friends: friends?.map(mapFriendship) ?? [], error };
+    return { friends: friends?.map((friend) => mapFriendship(friend, userId)) ?? [], error };
   }
 
   async getFriendsWorkout(friendIds: string[]) {
